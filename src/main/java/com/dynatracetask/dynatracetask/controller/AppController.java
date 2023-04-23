@@ -1,9 +1,11 @@
 package com.dynatracetask.dynatracetask.controller;
 
 import com.dynatracetask.dynatracetask.client.NbpClient;
+import com.dynatracetask.dynatracetask.exception.ClientException;
 import com.dynatracetask.dynatracetask.nbp.ExchangeRateTask12;
 import com.dynatracetask.dynatracetask.nbp.ExchangeRateTask3;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +34,11 @@ public class AppController {
                                                 @PathVariable(value = "N") String n) {
         ExchangeRateTask3 result = nbpClient.getMajorDifference(currencyCode, n);
         return nbpClient.getMajorDifference(currencyCode, n);
+    }
+
+    @ExceptionHandler
+    public String handle(ClientException cl){
+        return cl.getMessage();
     }
 }
 

@@ -13,5 +13,4 @@ public class ExchangeRateTask3 {
     private String currency;
     private String code;
     private List<RatesTask3> rates;
-
 }

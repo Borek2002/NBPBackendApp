@@ -1,12 +1,11 @@
 package com.dynatracetask.dynatracetask.client;
 
+import com.dynatracetask.dynatracetask.exception.ClientException;
 import com.dynatracetask.dynatracetask.nbp.ExchangeRateTask12;
 import com.dynatracetask.dynatracetask.nbp.ExchangeRateTask3;
 import com.dynatracetask.dynatracetask.nbp.rates.RatesTask12;
 import com.dynatracetask.dynatracetask.nbp.rates.RatesTask3;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -22,7 +21,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NbpClient {
     private static final String NBP_URL = "http://api.nbp.pl/api/exchangerates/";
-    private static final Logger LOGGER = LoggerFactory.getLogger(NbpClient.class);
     private final RestTemplate restTemplate;
 
     public ExchangeRateTask12 getAverageExchangeRate(String currencyCode, String date) {
@@ -33,8 +31,7 @@ public class NbpClient {
             ResponseEntity<ExchangeRateTask12> response = restTemplate.exchange(url, HttpMethod.GET, entity, ExchangeRateTask12.class);
             return response.getBody();
         } catch (RestClientException e) {
-            LOGGER.error(e.getMessage(), e);
-            return null;
+            throw new ClientException(e.getMessage());
         }
     }
 
@@ -47,8 +44,7 @@ public class NbpClient {
             response.getBody().setRates(setMinMaxValue(response.getBody().getRates()));
             return response.getBody();
         } catch (RestClientException e) {
-            LOGGER.error(e.getMessage(), e);
-            return null;
+            throw new ClientException(e.getMessage());
         }
     }
 
@@ -61,8 +57,7 @@ public class NbpClient {
             response.getBody().setRates(setMajorDifference(response.getBody().getRates()));
             return response.getBody();
         } catch (RestClientException e) {
-            LOGGER.error(e.getMessage(), e);
-            return null;
+            throw new ClientException(e.getMessage());
         }
     }
 
