@@ -9,5 +9,4 @@ public class DynatracetaskApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DynatracetaskApplication.class, args);
 	}
-
 }
