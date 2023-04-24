@@ -20,6 +20,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class NbpClient {
+
     private static final String NBP_URL = "http://api.nbp.pl/api/exchangerates/";
     private final RestTemplate restTemplate;
 
