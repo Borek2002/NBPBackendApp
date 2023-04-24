@@ -17,7 +17,7 @@ We can run 3 operations:
  curl http://localhost:8080/exchanges/average/{currencyCode}/{YYYY-MM-DD}
 ```
 - Min and max average value for the last N quotations 
-  (first rate in output is min Value and the second is max value)
+  (first rate in output is min value and the second is max value)
 ```bash
  curl http://localhost:8080/exchanges/maxmin/{currencyCode}/{N}
 ```
